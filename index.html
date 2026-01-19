@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bob Golf AI - Votre Caddie Personnel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .clip-path-slant { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .glow { box-shadow: 0 0 20px rgba(163, 230, 53, 0.3); }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 overflow-x-hidden">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-slate-950/80 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-xl bg-lime-400 flex items-center justify-center shadow-[0_0_15px_rgba(163,230,53,0.4)]">
+                    <span class="font-bold text-slate-900 text-xl">B</span>
+                </div>
+                <span class="font-bold text-white text-xl tracking-tight">Bob<span class="text-lime-400">.ai</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-400">
+                <a href="#features" class="hover:text-lime-400 transition-colors">Fonctionnalités</a>
+                <a href="#demo" class="hover:text-lime-400 transition-colors">Démonstration</a>
+                <a href="#pricing" class="hover:text-lime-400 transition-colors">Prix</a>
+                <a href="#faq" class="hover:text-lime-400 transition-colors">FAQ</a>
+            </div>
+            <a href="#pricing" class="bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold py-2.5 px-6 rounded-full transition-all hover:scale-105 shadow-[0_0_15px_rgba(163,230,53,0.3)]">
+                Essai Gratuit
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-lime-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-lime-500/30 text-lime-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+                    Nouveau : Mode Vision 2.0
+                </div>
+                <h1 class="text-5xl lg:text-7xl font-black text-white leading-tight">
+                    Bien plus qu'un Caddie. <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-green-600">7 Coachs en 1 App.</span>
+                </h1>
+                <p class="text-lg text-slate-400 max-w-lg leading-relaxed">
+                    Rencontrez <strong>Bob</strong>. C'est votre équipe technique complète : Entraînement, Mental, Technique, Physique, Nutrition, Règles et Stratégie.
+                    <br/><br/>
+                    <span class="text-white font-medium">L'expertise de 7 pros pour moins cher qu'un café.</span>
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="#pricing" class="flex items-center justify-center gap-2 bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-lg py-4 px-8 rounded-2xl transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(163,230,53,0.4)]">
+                        <i data-lucide="download"></i>
+                        Télécharger Bob
+                    </a>
+                    <button class="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-medium text-lg py-4 px-8 rounded-2xl border border-white/5 transition-all">
+                        <i data-lucide="play-circle"></i>
+                        Voir la démo
+                    </button>
+                </div>
+                <div class="flex items-center gap-4 text-sm text-slate-500 pt-4">
+                    <div class="flex -space-x-2">
+                        <img src="https://i.pravatar.cc/100?img=33" class="w-8 h-8 rounded-full border-2 border-slate-950" alt="User">
+                        <img src="https://i.pravatar.cc/100?img=47" class="w-8 h-8 rounded-full border-2 border-slate-950" alt="User">
+                        <img src="https://i.pravatar.cc/100?img=12" class="w-8 h-8 rounded-full border-2 border-slate-950" alt="User">
+                    </div>
+                    <p>Déjà utilisé par +5,000 golfeurs</p>
+                </div>
+            </div>
+
+            <!-- Phone Mockup -->
+            <div class="relative lg:h-[800px] flex items-center justify-center animate-float">
+                <div class="relative w-[320px] h-[650px] bg-slate-950 rounded-[3rem] border-8 border-slate-800 shadow-2xl overflow-hidden z-20">
+                    <!-- Chat Simulation -->
+                    <div class="absolute inset-0 bg-slate-900 flex flex-col">
+                        <!-- Header -->
+                        <div class="p-6 bg-slate-950/80 backdrop-blur-sm border-b border-white/5 flex items-center gap-3">
+                             <div class="w-8 h-8 rounded-full bg-lime-400 flex items-center justify-center font-bold text-slate-900">B</div>
+                             <div>
+                                 <div class="text-white font-bold text-sm">Bob.ai</div>
+                                 <div class="text-lime-400 text-[10px] flex items-center gap-1"><span class="w-1.5 h-1.5 bg-lime-400 rounded-full"></span> Online</div>
+                             </div>
+                        </div>
+                        <!-- Messages -->
+                        <div class="flex-1 p-4 space-y-4 overflow-hidden">
+                            <div class="flex justify-end">
+                                <div class="bg-lime-500 text-slate-900 p-3 rounded-2xl rounded-tr-sm text-sm max-w-[85%] shadow-lg">
+                                    Ma balle est dans un bunker inondé. Je fais quoi Bob ? 😰
+                                </div>
+                            </div>
+                            <div class="flex justify-start">
+                                <div class="bg-slate-800 text-slate-200 border border-white/10 p-3 rounded-2xl rounded-tl-sm text-sm max-w-[90%] shadow-lg">
+                                    <span class="text-xs font-bold text-red-400 uppercase mb-1 block">Règles • 16.1c</span>
+                                    Pas de panique ! C'est une condition anormale. Tu as droit à un dégagement gratuit <strong>DANS</strong> le bunker au point sec le plus proche.
+                                </div>
+                            </div>
+                             <div class="flex justify-start">
+                                <div class="bg-slate-800 text-slate-200 border border-white/10 p-3 rounded-2xl rounded-tl-sm text-sm max-w-[90%] shadow-lg">
+                                    Si tout le bunker est sous l'eau, tu peux dropper en dehors avec <strong>1 coup de pénalité</strong>. Tu veux savoir quel club jouer ?
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Input -->
+                        <div class="p-4 bg-slate-950 border-t border-white/5">
+                            <div class="h-12 bg-slate-800 rounded-full w-full opacity-50"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute top-20 -left-10 bg-slate-800 p-4 rounded-xl border border-white/10 shadow-xl z-30 animate-bounce" style="animation-duration: 3s;">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-red-500/20 rounded-lg text-red-400"><i data-lucide="book-open" class="w-5 h-5"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-bold">Arbitrage Instantané</p>
+                            <p class="text-white font-bold">Règle 16.1c</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-40 -right-10 bg-slate-800 p-4 rounded-xl border border-white/10 shadow-xl z-30 animate-bounce" style="animation-duration: 4s;">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-lime-500/20 rounded-lg text-lime-400"><i data-lucide="target" class="w-5 h-5"></i></div>
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-bold">Conseil Stratégique</p>
+                            <p class="text-white font-bold">Joue le Bogey !</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES GRID -->
+    <section id="features" class="py-24 bg-slate-900 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">7 Coachs d'élite dans votre poche.<br/><span class="text-slate-500">Une seule application.</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Pourquoi payer une fortune pour un staff complet ? Bob maîtrise chaque aspect de votre performance, de l'échauffement au putt de la victoire.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Feature 0 (NEW): Entraînement -->
+                <div class="bg-slate-950 p-8 rounded-3xl border border-white/5 hover:border-lime-500/30 transition-all hover:-translate-y-2 group flex flex-col h-full lg:col-span-3 lg:w-2/3 lg:mx-auto">
+                    <div class="flex items-start gap-6">
+                        <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-lime-400 group-hover:text-slate-900 transition-colors text-white">
+                            <i data-lucide="clipboard-list" class="w-7 h-7"></i>
+                        </div>
+                        <div>
+                             <h3 class="text-xl font-bold text-white mb-2">Directeur d'Entraînement</h3>
+                             <p class="text-slate-400 leading-relaxed mb-4">
+                                Ne tapez plus jamais une balle au hasard. Dites simplement : <em>"J'ai 1h devant moi"</em> ou <em>"J'ai 3h cet après-midi"</em>. Bob crée instantanément votre séance sur-mesure (échauffement, gammes techniques, défis de scoring) en fonction de vos objectifs du moment.
+                             </p>
+                             <p class="text-sm font-medium text-lime-400 pt-2 border-t border-white/5">
+                                "Imaginez avoir un plan d'entraînement structuré à la minute près, comme les pros du Tour."
+                             </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 1: Technique -->
+                <div class="bg-slate-950 p-8 rounded-3xl border border-white/5 hover:border-lime-500/30 transition-all hover:-translate-y-2 group flex flex-col h-full">
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-lime-400 group-hover:text-slate-900 transition-colors text-white">
+                        <i data-lucide="camera" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Coach Technique</h3>
+                    <p class="text-slate-400 leading-relaxed mb-4 flex-grow">Vision AI analyse votre swing et vos lies. Corrigez votre slice et sortez des bunkers grâce à une analyse instantanée par photo.</p>
+                    <p class="mt-auto pt-4 border-t border-white/5 text-sm font-medium text-lime-400">
+                        "Imaginez avoir l'œil de Butch Harmon et David Leadbetter sur chaque swing."
+                    </p>
+                </div>
+
+                <!-- Feature 2: Mental -->
+                <div class="bg-slate-950 p-8 rounded-3xl border border-white/5 hover:border-purple-500/30 transition-all hover:-translate-y-2 group flex flex-col h-full">
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors text-white">
+                        <i data-lucide="brain-circuit" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Coach Mental</h3>
+                    <p class="text-slate-400 leading-relaxed mb-4 flex-grow">Stressé au départ du 1 ? Bob vous donne des routines de respiration et des ancrages mentaux pour rester dans la zone.</p>
+                    <p class="mt-auto pt-4 border-t border-white/5 text-sm font-medium text-purple-400">
+                        "Imaginez parler avec Bob Rotella et Pia Nilsson pour améliorer votre mental."
+                    </p>
+                </div>
+
+                <!-- Feature 3: Stratégie -->
+                <div class="bg-slate-950 p-8 rounded-3xl border border-white/5 hover:border-blue-500/30 transition-all hover:-translate-y-2 group flex flex-col h-full">
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500 group-hover:text-white transition-colors text-white">
+                        <i data-lucide="map" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Stratège de Parcours</h3>
+                    <p class="text-slate-400 leading-relaxed mb-4 flex-grow">Gestion du vent, choix du club, zones de danger. Bob connaît vos distances réelles et vous dit où jouer (et où ne pas jouer).</p>
+                    <p class="mt-auto pt-4 border-t border-white/5 text-sm font-medium text-blue-400">
+                        "Imaginez parler avec Mark Broadie et Scott Fawcett pour améliorer votre stratégie de jeu."
+                    </p>
+                </div>
+
+                <!-- Feature 4: Règles -->
+                <div class="bg-slate-950 p-8 rounded-3xl border border-white/5 hover:border-red-500/30 transition-all hover:-translate-y-2 group flex flex-col h-full">
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-500 group-hover:text-white transition-colors text-white">
+                        <i data-lucide="gavel" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Arbitre Officiel</h3>
+                    <p class="text-slate-400 leading-relaxed mb-4 flex-grow">Un doute sur un drop ? Une balle bougée ? Posez votre question en langage naturel, Bob vous donne la règle exacte immédiatement.</p>
+                    <p class="mt-auto pt-4 border-t border-white/5 text-sm font-medium text-red-400">
+                        "Imaginez avoir l'arbitre en chef du R&A ou de l'USGA dans votre poche à chaque coup."
+                    </p>
+                </div>
+
+                <!-- Feature 5: Physique -->
+                <div class="bg-slate-950 p-8 rounded-3xl border border-white/5 hover:border-orange-500/30 transition-all hover:-translate-y-2 group flex flex-col h-full">
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors text-white">
+                        <i data-lucide="activity" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Prépa Physique</h3>
+                    <p class="text-slate-400 leading-relaxed mb-4 flex-grow">Échauffements de 5 min au practice, exercices de mobilité ou renforcement du dos. Votre corps prêt à performer.</p>
+                    <p class="mt-auto pt-4 border-t border-white/5 text-sm font-medium text-orange-400">
+                        "Imaginez suivre les programmes de Joey D et des experts du TPI pour votre corps."
+                    </p>
+                </div>
+
+                <!-- Feature 6: Nutrition -->
+                <div class="bg-slate-950 p-8 rounded-3xl border border-white/5 hover:border-green-500/30 transition-all hover:-translate-y-2 group flex flex-col h-full">
+                    <div class="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-green-500 group-hover:text-white transition-colors text-white">
+                        <i data-lucide="apple" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Coach Nutrition</h3>
+                    <p class="text-slate-400 leading-relaxed mb-4 flex-grow">Gestion de l'énergie sur 18 trous. Hydratation, snacks, timing des repas. Finissez le parcours aussi fort que vous l'avez commencé.</p>
+                    <p class="mt-auto pt-4 border-t border-white/5 text-sm font-medium text-green-400">
+                        "Imaginez les conseils des nutritionnistes qui suivent l'élite du PGA Tour."
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THE "BUCKET OF BALLS" ARGUMENT SECTION -->
+    <section id="pricing" class="py-24 relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-white mb-4">L'investissement le plus rentable de votre sac.</h2>
+                <p class="text-xl text-slate-400">Pourquoi payer des centaines d'euros de leçons quand Bob est là ?</p>
+            </div>
+
+            <div class="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 border border-white/10 shadow-2xl flex flex-col md:flex-row items-center gap-12">
+                
+                <!-- The Comparison Visual -->
+                <div class="flex-1 w-full space-y-8">
+                    <!-- Bad Option -->
+                    <div class="flex items-center justify-between p-6 bg-slate-950 rounded-2xl border border-slate-800 opacity-60 grayscale hover:grayscale-0 transition-all">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center">
+                                <i data-lucide="shopping-basket" class="w-6 h-6 text-slate-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-300">1 Seau de balles</h4>
+                                <p class="text-xs text-slate-500">Dure 45 minutes</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-xl font-bold text-slate-300">~5.00 €</span>
+                            <span class="text-xs text-red-400">Consommable</span>
+                        </div>
+                    </div>
+
+                    <!-- Bob Option -->
+                    <div class="flex items-center justify-between p-6 bg-slate-800 rounded-2xl border border-lime-500 shadow-[0_0_30px_rgba(163,230,53,0.1)] transform scale-105">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-lime-400 rounded-full flex items-center justify-center text-slate-900">
+                                <i data-lucide="crown" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white">Bob Premium</h4>
+                                <p class="text-xs text-lime-400">Illimité 24/7 pendant 1 mois</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-3xl font-black text-white">1.99 $</span>
+                            <span class="text-xs text-lime-400 font-bold">Moins cher qu'un seau !</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The CTA Side -->
+                <div class="flex-1 w-full text-center md:text-left space-y-6">
+                    <h3 class="text-2xl font-bold text-white">Arrêtez de gaspiller des balles sans but.</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-lime-400"></i>
+                            Conseils techniques illimités
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-lime-400"></i>
+                            Analyse photo (Vision AI)
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-lime-400"></i>
+                            Statistiques de vos clubs
+                        </li>
+                        <li class="flex items-center gap-3 text-slate-300">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-lime-400"></i>
+                            Pas d'engagement, annulez quand vous voulez
+                        </li>
+                    </ul>
+                    <div class="pt-4">
+                        <a href="#" class="block w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-300 hover:to-green-400 text-slate-900 font-black text-xl py-5 rounded-xl transition-all shadow-lg text-center">
+                            Commencer l'Essai Gratuit
+                            <span class="block text-xs font-normal opacity-80 mt-1">7 jours offerts puis 1.99$/mois</span>
+                        </a>
+                        <p class="text-xs text-slate-500 text-center mt-3">Offre sécurisée via App Store & Google Play</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-24 bg-slate-950 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-white mb-12">Ils ont baissé leur index grâce à Bob</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- User 1 -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-300 mb-6">"Je ne prenais jamais de cours car trop chers. Bob m'a corrigé mon slice en 3 séances de practice. Pour le prix, c'est indécent."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-500">J</div>
+                        <div>
+                            <p class="font-bold text-white">Julien M.</p>
+                            <p class="text-xs text-slate-500">HCP 24 → 18</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User 2 -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-300 mb-6">"La fonction Vision est bluffante. J'ai pris une photo de ma balle dans les épines, Bob m'a dit de prendre une pénalité au lieu de tenter l'impossible. J'ai sauvé ma carte."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-500">S</div>
+                        <div>
+                            <p class="font-bold text-white">Sarah L.</p>
+                            <p class="text-xs text-slate-500">HCP 12</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User 3 -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star-half" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-300 mb-6">"C'est comme avoir un cadet du Tour dans la poche. Il connait mes distances mieux que moi."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center font-bold text-slate-500">M</div>
+                        <div>
+                            <p class="font-bold text-white">Marc D.</p>
+                            <p class="text-xs text-slate-500">HCP 8</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 bg-slate-900">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">Questions Fréquentes</h2>
+            <div class="space-y-4">
+                
+                <!-- 1. Offline -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Bob fonctionne-t-il hors ligne ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Une connexion internet (4G/5G) est requise pour que l'IA de Bob analyse vos questions complexes et vos images en temps réel avec toute sa puissance.</p>
+                </details>
+
+                <!-- 2. Slice Correction (User Request) -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Bob peut-il vraiment corriger mon slice ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Oui, c'est sa spécialité technique. Décrivez votre trajectoire ou prenez votre swing en photo/vidéo. Bob analysera la cause (souvent un chemin de club extérieur-intérieur ou une face ouverte) et vous donnera l'exercice correctif immédiat ("L'exercice du seau", "Fermer la porte", etc.) à faire au practice ou sur le parcours.</p>
+                </details>
+
+                <!-- 3. Training Program (User Request) -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Bob peut-il me faire un programme d'entraînement ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Absolument. Dites à Bob : "J'ai 1h devant moi et je veux améliorer mes fers". Il vous générera une séance structurée minute par minute (ex: 10min échauffement, 20min gammes techniques, 20min cibles aléatoires, 10min retour au calme).</p>
+                </details>
+
+                <!-- 4. Nutrition (User Request) -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Comment Bob m'aide-t-il à m'alimenter en partie ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">La fatigue au trou 14 tue votre carte. Bob vous rappelle stratégiquement quand boire et manger (trous 3, 6, 9, 12, 15). Il vous suggère aussi les meilleurs snacks (amandes, bananes) pour maintenir une glycémie stable et une concentration maximale.</p>
+                </details>
+
+                <!-- 5. Fitness (User Request) -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Bob peut-il m'aider à être plus en forme physiquement ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Oui. Bob propose des routines spécifiques au golf : mobilité des hanches pour la rotation, renforcement du "core" pour la puissance et étirements du dos pour jouer sans douleur. Idéal pour s'échauffer 5 minutes avant le départ.</p>
+                </details>
+
+                <!-- 6. Mental Game -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Comment fonctionne le coaching mental ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Si vous dites "Je suis stressé" ou "Je viens de faire un triple bogey", Bob vous donne instantanément un exercice de respiration (box breathing) ou de visualisation pour faire redescendre votre rythme cardiaque et vous remettre dans la zone immédiatement.</p>
+                </details>
+
+                <!-- 7. Subscription -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Puis-je annuler à tout moment ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Oui, sans aucune condition. L'abonnement se gère directement et simplement via l'App Store (Apple) ou le Google Play Store. Vous gardez le contrôle total.</p>
+                </details>
+
+                <!-- 8. Competition Rules -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Bob est-il autorisé en compétition ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Selon les règles locales, l'usage d'aides artificielles (conseils de club, vent) est interdit pendant le jeu en compétition officielle. Cependant, vous pouvez utiliser Bob pour vérifier une procédure de règle (arbitrage) ou pour préparer votre stratégie avant la partie.</p>
+                </details>
+
+                <!-- 9. Beginner Friendly -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Je suis débutant, est-ce utile pour moi ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">C'est l'outil idéal pour débuter. Bob vous explique les termes techniques, vous évite les erreurs de règles coûteuses et vous aide à choisir le bon club sans la pression de devoir demander aux autres joueurs.</p>
+                </details>
+
+                <!-- 10. Data Privacy -->
+                <details class="group bg-slate-950 p-6 rounded-2xl border border-white/5 cursor-pointer transition-all hover:border-lime-500/20">
+                    <summary class="flex justify-between items-center font-bold text-white list-none">
+                        Mes données de jeu sont-elles privées ?
+                        <span class="transition group-open:rotate-180"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-slate-400 mt-4 leading-relaxed">Strictement confidentielles. Vos distances, photos de swing et conversations avec Bob sont cryptées. Nous ne vendons pas vos données. Ce qui se passe sur le parcours reste sur le parcours.</p>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-lime-500/10"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-black text-white mb-6">Prêt à jouer votre meilleur golf ?</h2>
+            <p class="text-xl text-slate-300 mb-8">Rejoignez Bob aujourd'hui. Votre premier birdie n'est plus très loin.</p>
+            <button class="bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-xl py-5 px-12 rounded-full shadow-[0_0_30px_rgba(163,230,53,0.5)] transition-all transform hover:scale-105">
+                Télécharger Bob - Essai Gratuit
+            </button>
+            <p class="mt-4 text-sm text-slate-500">Compatible iOS & Android</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-white/5 py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-lime-400 flex items-center justify-center">
+                    <span class="font-bold text-slate-900">B</span>
+                </div>
+                <span class="font-bold text-white text-lg">Bob<span class="text-lime-400">.ai</span></span>
+            </div>
+            <div class="text-slate-500 text-sm">
+                &copy; 2024 Watson Golf AI. Tous droits réservés.
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="text-slate-400 hover:text-white"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white"><i data-lucide="mail" class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
