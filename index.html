@@ -18,6 +18,16 @@
         }
         .glow { box-shadow: 0 0 20px rgba(163, 230, 53, 0.3); }
 
+        /* Social Button Hover Effects */
+        .social-btn:hover { transform: translateY(-2px); }
+
+        /* Modal Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-animate { animation: fadeIn 0.3s ease-out forwards; }
+
         /* Language Switching Logic */
         /* By default, hide English */
         :not(body.lang-en-active) .lang-en { display: none !important; }
@@ -31,10 +41,144 @@
         body.lang-en-active h1.lang-en,
         body.lang-en-active h2.lang-en,
         body.lang-en-active h3.lang-en,
+        body.lang-en-active h4.lang-en,
+        body.lang-en-active span.lang-en,
+        body.lang-en-active button.lang-en,
+        body.lang-en-active label.lang-en,
         body.lang-en-active ul.lang-en { display: block !important; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-200 overflow-x-hidden">
+<body class="bg-slate-950 text-slate-200 overflow-x-hidden selection:bg-lime-500/30">
+
+    <!-- SIGNUP MODAL (Hidden by default) -->
+    <div id="signup-modal" class="fixed inset-0 z-[100] hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity" onclick="toggleSignupModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative w-full h-full flex items-center justify-center p-4 pointer-events-none">
+            <div class="w-full max-w-md bg-slate-900 border border-white/10 rounded-3xl shadow-2xl p-8 modal-animate pointer-events-auto relative overflow-y-auto max-h-[90vh]">
+                
+                <!-- Close Button -->
+                <button onclick="toggleSignupModal()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-all">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+
+                <!-- Header -->
+                <div class="text-center mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-lime-400 flex items-center justify-center shadow-[0_0_15px_rgba(163,230,53,0.4)] mx-auto mb-4">
+                        <span class="font-bold text-slate-900 text-2xl">B</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">
+                        <span class="lang-fr">Commencez votre essai gratuit</span>
+                        <span class="lang-en">Start your free trial</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm">
+                        <span class="lang-fr">7 jours offerts, sans engagement.</span>
+                        <span class="lang-en">7 days free, no commitment.</span>
+                    </p>
+                </div>
+
+                <!-- Social Login -->
+                <div class="space-y-3 mb-6">
+                    <button class="social-btn w-full bg-white text-slate-900 font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-3 transition-all hover:bg-slate-100">
+                        <!-- Google SVG -->
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        <span class="lang-fr">Continuer avec Google</span>
+                        <span class="lang-en">Continue with Google</span>
+                    </button>
+                    <button class="social-btn w-full bg-[#1877F2] text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-3 transition-all hover:bg-[#166fe5]">
+                        <!-- Facebook SVG -->
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        <span class="lang-fr">Continuer avec Facebook</span>
+                        <span class="lang-en">Continue with Facebook</span>
+                    </button>
+                    <button class="social-btn w-full bg-black text-white border border-white/20 font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-3 transition-all hover:bg-slate-900">
+                        <!-- Apple SVG -->
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74 1.18 0 2.45-1.62 4.12-1.62 1.62.06 2.89.65 3.68 1.62-3.15 1.59-2.56 6.35.65 7.62-.65 1.85-1.62 3.68-3.53 4.61zM12.03 7.25c-.15-2.23 1.68-4.09 3.68-4.25.29 2.47-2.35 4.35-3.68 4.25z"/>
+                        </svg>
+                        <span class="lang-fr">Continuer avec Apple</span>
+                        <span class="lang-en">Continue with Apple</span>
+                    </button>
+                </div>
+
+                <!-- Divider -->
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="h-px bg-white/10 flex-1"></div>
+                    <span class="text-xs text-slate-500 font-medium uppercase">
+                        <span class="lang-fr">Ou par email</span>
+                        <span class="lang-en">Or via email</span>
+                    </span>
+                    <div class="h-px bg-white/10 flex-1"></div>
+                </div>
+
+                <!-- Email Form -->
+                <form class="space-y-4" onsubmit="event.preventDefault();">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1 ml-1">Email</label>
+                        <input type="email" placeholder="tiger@golf.com" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1 ml-1">
+                            <span class="lang-fr">Mot de passe</span>
+                            <span class="lang-en">Password</span>
+                        </label>
+                        <input type="password" placeholder="••••••••" class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 transition-all">
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-lime-400 hover:bg-lime-300 text-slate-900 font-black py-4 rounded-xl shadow-[0_0_20px_rgba(163,230,53,0.3)] hover:shadow-[0_0_30px_rgba(163,230,53,0.5)] transition-all transform hover:-translate-y-1 mt-2">
+                        <span class="lang-fr">Créer mon compte</span>
+                        <span class="lang-en">Create Account</span>
+                    </button>
+                </form>
+
+                <!-- Code Activation Link -->
+                <div class="mt-6 text-center">
+                    <button class="text-sm text-lime-400 hover:text-lime-300 font-medium hover:underline transition-colors flex items-center justify-center gap-2 mx-auto">
+                        <i data-lucide="ticket" class="w-4 h-4"></i>
+                        <span class="lang-fr">J'ai un code d'activation</span>
+                        <span class="lang-en">I have an activation code</span>
+                    </button>
+                </div>
+
+                <!-- Partners Section -->
+                <div class="mt-8 pt-6 border-t border-white/5">
+                    <p class="text-center text-xs text-slate-500 mb-4">
+                        <span class="lang-fr">J'accède via un partenaire</span>
+                        <span class="lang-en">Access via partner</span>
+                    </p>
+                    <div class="flex justify-center items-center gap-6 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                        <!-- FFGolf Placeholder -->
+                        <div class="h-6 flex items-center justify-center" title="FFGolf">
+                            <span class="text-lg font-black italic text-white tracking-tighter leading-none">ff<span class="text-red-500">golf</span></span>
+                        </div>
+                        <!-- Golf Plus Placeholder -->
+                        <div class="h-6 flex items-center justify-center" title="Golf Plus">
+                            <span class="text-lg font-bold text-white leading-none"><span class="text-green-500">GOLF</span>PLUS</span>
+                        </div>
+                        <!-- Titleist Placeholder -->
+                        <div class="h-6 flex items-center justify-center" title="Titleist">
+                            <span class="text-lg font-serif font-bold text-white tracking-wide leading-none">Titleist</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center text-[10px] text-slate-600">
+                    <span class="lang-fr">En continuant, vous acceptez nos CGU et Politique de Confidentialité.</span>
+                    <span class="lang-en">By continuing, you agree to our Terms and Privacy Policy.</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- NAVIGATION -->
     <nav class="fixed w-full z-50 backdrop-blur-md bg-slate-950/80 border-b border-white/5">
@@ -69,10 +213,10 @@
                 </button>
             </div>
 
-            <a href="#pricing" class="bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold py-2.5 px-6 rounded-full transition-all hover:scale-105 shadow-[0_0_15px_rgba(163,230,53,0.3)]">
+            <button onclick="toggleSignupModal()" class="bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold py-2.5 px-6 rounded-full transition-all hover:scale-105 shadow-[0_0_15px_rgba(163,230,53,0.3)]">
                 <span class="lang-fr">Essai Gratuit</span>
                 <span class="lang-en">Free Trial</span>
-            </a>
+            </button>
         </div>
     </nav>
 
@@ -107,11 +251,11 @@
                     </span>
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <a href="#pricing" class="flex items-center justify-center gap-2 bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-lg py-4 px-8 rounded-2xl transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(163,230,53,0.4)]">
+                    <button onclick="toggleSignupModal()" class="flex items-center justify-center gap-2 bg-lime-400 hover:bg-lime-300 text-slate-950 font-bold text-lg py-4 px-8 rounded-2xl transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(163,230,53,0.4)]">
                         <i data-lucide="download"></i>
                         <span class="lang-fr">Télécharger Bob</span>
                         <span class="lang-en">Download Bob</span>
-                    </a>
+                    </button>
                     <a href="https://agent-bob-golf.vercel.app/" target="_blank" class="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-medium text-lg py-4 px-8 rounded-2xl border border-white/5 transition-all">
                         <i data-lucide="play-circle"></i>
                         <span class="lang-fr">Voir la démo</span>
@@ -469,7 +613,7 @@
                             </div>
                         </div>
                         <div class="text-right">
-                            <span class="block text-3xl font-black text-white">1.99 $</span>
+                            <span class="block text-3xl font-black text-white">2.99 $</span>
                             <span class="text-xs text-lime-400 font-bold">
                                 <span class="lang-fr">Moins cher qu'un seau !</span>
                                 <span class="lang-en">Cheaper than a bucket!</span>
@@ -507,14 +651,14 @@
                         </li>
                     </ul>
                     <div class="pt-4">
-                        <a href="#" class="block w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-300 hover:to-green-400 text-slate-900 font-black text-xl py-5 rounded-xl transition-all shadow-lg text-center">
+                        <button onclick="toggleSignupModal()" class="block w-full bg-gradient-to-r from-lime-400 to-green-500 hover:from-lime-300 hover:to-green-400 text-slate-900 font-black text-xl py-5 rounded-xl transition-all shadow-lg text-center">
                             <span class="lang-fr">Commencer l'Essai Gratuit</span>
                             <span class="lang-en">Start Free Trial</span>
                             <span class="block text-xs font-normal opacity-80 mt-1">
-                                <span class="lang-fr">7 jours offerts puis 1.99$/mois</span>
-                                <span class="lang-en">7 days free then $1.99/mo</span>
+                                <span class="lang-fr">7 jours offerts puis 2.99$/mois</span>
+                                <span class="lang-en">7 days free then $2.99/mo</span>
                             </span>
-                        </a>
+                        </button>
                         <p class="text-xs text-slate-500 text-center mt-3">
                             <span class="lang-fr">Offre sécurisée via App Store & Google Play</span>
                             <span class="lang-en">Secure offer via App Store & Google Play</span>
@@ -533,9 +677,10 @@
                 <span class="lang-fr">Ils ont baissé leur index grâce à Bob</span>
                 <span class="lang-en">They lowered their handicap thanks to Bob</span>
             </h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- User 1 -->
-                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- 1. Julien (Original - Slice) -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 hover:border-lime-500/30 transition-all group">
                     <div class="flex gap-1 text-yellow-400 mb-4">
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -543,21 +688,26 @@
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                     </div>
-                    <p class="text-slate-300 mb-6">
+                    <h4 class="font-bold text-white text-sm mb-2 flex items-center gap-2">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-lime-400"></i>
+                        <span class="lang-fr">Adieu le Slice</span>
+                        <span class="lang-en">Bye Bye Slice</span>
+                    </h4>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                         <span class="lang-fr">"Je ne prenais jamais de cours car trop chers. Bob m'a corrigé mon slice en 3 séances de practice. Pour le prix, c'est indécent."</span>
                         <span class="lang-en">"I never took lessons because they were too expensive. Bob fixed my slice in 3 range sessions. For the price, it's insane."</span>
                     </p>
                     <div class="flex items-center gap-3">
-                        <img src="https://i.pravatar.cc/150?img=11" alt="Julien M." class="w-12 h-12 rounded-full border-2 border-slate-700 object-cover">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Julien M." class="w-10 h-10 rounded-full border-2 border-slate-700 object-cover">
                         <div>
-                            <p class="font-bold text-white">Julien M.</p>
+                            <p class="font-bold text-white text-sm">Julien M.</p>
                             <p class="text-xs text-slate-500">HCP 24 → 18</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- User 2 -->
-                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5">
+                <!-- 2. Sarah (Original - Vision/Penalty) -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 hover:border-lime-500/30 transition-all group">
                     <div class="flex gap-1 text-yellow-400 mb-4">
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -565,21 +715,80 @@
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                     </div>
-                    <p class="text-slate-300 mb-6">
+                    <h4 class="font-bold text-white text-sm mb-2 flex items-center gap-2">
+                        <i data-lucide="eye" class="w-4 h-4 text-blue-400"></i>
+                        <span class="lang-fr">Lucidité Tactique</span>
+                        <span class="lang-en">Tactical Clarity</span>
+                    </h4>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
                         <span class="lang-fr">"La fonction Vision est bluffante. J'ai pris une photo de ma balle dans les épines, Bob m'a dit de prendre une pénalité au lieu de tenter l'impossible. J'ai sauvé ma carte."</span>
                         <span class="lang-en">"The Vision feature is amazing. I took a photo of my ball in the thorns, Bob told me to take a penalty instead of trying the impossible. Saved my scorecard."</span>
                     </p>
                     <div class="flex items-center gap-3">
-                        <img src="https://i.pravatar.cc/150?img=5" alt="Sarah L." class="w-12 h-12 rounded-full border-2 border-slate-700 object-cover">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Sarah L." class="w-10 h-10 rounded-full border-2 border-slate-700 object-cover">
                         <div>
-                            <p class="font-bold text-white">Sarah L.</p>
+                            <p class="font-bold text-white text-sm">Sarah L.</p>
                             <p class="text-xs text-slate-500">HCP 12</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- User 3 -->
-                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5">
+                <!-- 3. Thomas (New - Hero Syndrome) -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 hover:border-lime-500/30 transition-all group">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm mb-2 flex items-center gap-2">
+                        <i data-lucide="map" class="w-4 h-4 text-orange-400"></i>
+                        <span class="lang-fr">Fini les miracles</span>
+                        <span class="lang-en">No more hero shots</span>
+                    </h4>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                        <span class="lang-fr">"Avant, je tentais toujours le coup impossible depuis les bois. J'ai pris une photo, Bob m'a dit : 'Recentrage fairway, wedge, putt'. J'ai sauvé le bogey et ma carte."</span>
+                        <span class="lang-en">"I always tried the miracle shot from the woods. I took a photo, Bob said: 'Punch out, wedge, putt'. Saved the bogey and my scorecard."</span>
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.pravatar.cc/150?img=68" alt="Thomas" class="w-10 h-10 rounded-full border-2 border-slate-700 object-cover">
+                        <div>
+                            <p class="font-bold text-white text-sm">Thomas R.</p>
+                            <p class="text-xs text-slate-500">HCP 18</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Claire (New - Rough Lie) -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 hover:border-lime-500/30 transition-all group">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm mb-2 flex items-center gap-2">
+                        <i data-lucide="camera" class="w-4 h-4 text-lime-400"></i>
+                        <span class="lang-fr">Sauvée du Rough</span>
+                        <span class="lang-en">Saved from Rough</span>
+                    </h4>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                        <span class="lang-fr">"Balle enfoncée dans le gros rough. J'allais prendre mon hybride. J'ai scanné la balle, Bob m'a dit : 'Fer 9 maximum, joue la sortie'. J'ai évité la catastrophe habituelle."</span>
+                        <span class="lang-en">"Ball buried in deep rough. I was grabbing my hybrid. Scanned it, Bob said: '9 iron max, play for exit'. Avoided my usual disaster."</span>
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.pravatar.cc/150?img=9" alt="Claire" class="w-10 h-10 rounded-full border-2 border-slate-700 object-cover">
+                        <div>
+                            <p class="font-bold text-white text-sm">Claire L.</p>
+                            <p class="text-xs text-slate-500">HCP 32</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Maxime (New - Rules) -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 hover:border-lime-500/30 transition-all group">
                     <div class="flex gap-1 text-yellow-400 mb-4">
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
@@ -587,18 +796,51 @@
                         <i data-lucide="star" class="w-4 h-4 fill-current"></i>
                         <i data-lucide="star-half" class="w-4 h-4 fill-current"></i>
                     </div>
-                    <p class="text-slate-300 mb-6">
-                        <span class="lang-fr">"C'est comme avoir un cadet du Tour dans la poche. Il connait mes distances mieux que moi."</span>
-                        <span class="lang-en">"It's like having a Tour caddie in your pocket. He knows my distances better than I do."</span>
+                    <h4 class="font-bold text-white text-sm mb-2 flex items-center gap-2">
+                        <i data-lucide="gavel" class="w-4 h-4 text-red-400"></i>
+                        <span class="lang-fr">L'Arbitre de poche</span>
+                        <span class="lang-en">Pocket Referee</span>
+                    </h4>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                        <span class="lang-fr">"Balle contre un grillage. Je ne savais pas si j'avais un free drop. J'ai demandé à Bob, réponse en 5 secondes. J'ai droppé légalement et sauvé mon poignet."</span>
+                        <span class="lang-en">"Ball against a fence. Didn't know if I got a free drop. Asked Bob, answer in 5s. Dropped legally and saved my wrist."</span>
                     </p>
                     <div class="flex items-center gap-3">
-                        <img src="https://i.pravatar.cc/150?img=3" alt="Marc D." class="w-12 h-12 rounded-full border-2 border-slate-700 object-cover">
+                        <img src="https://i.pravatar.cc/150?img=53" alt="Maxime" class="w-10 h-10 rounded-full border-2 border-slate-700 object-cover">
                         <div>
-                            <p class="font-bold text-white">Marc D.</p>
+                            <p class="font-bold text-white text-sm">Maxime D.</p>
+                            <p class="text-xs text-slate-500">HCP 11</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Marc (Updated - Strategy) -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-white/5 hover:border-lime-500/30 transition-all group">
+                    <div class="flex gap-1 text-yellow-400 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-sm mb-2 flex items-center gap-2">
+                        <i data-lucide="target" class="w-4 h-4 text-purple-400"></i>
+                        <span class="lang-fr">Stratégie payante</span>
+                        <span class="lang-en">Smart Strategy</span>
+                    </h4>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                        <span class="lang-fr">"Je chassais tous les drapeaux. Bob m'a appris à viser le milieu de green quand le danger est trop grand. J'ai moins de birdies, mais plus aucune croix sur ma carte."</span>
+                        <span class="lang-en">"I used to pin seek every shot. Bob taught me to aim for center green when danger lurks. Fewer birdies, but no more blow-up holes on my card."</span>
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <img src="https://i.pravatar.cc/150?img=3" alt="Marc" class="w-10 h-10 rounded-full border-2 border-slate-700 object-cover">
+                        <div>
+                            <p class="font-bold text-white text-sm">Marc D.</p>
                             <p class="text-xs text-slate-500">HCP 8</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -758,7 +1000,7 @@
                 <span class="lang-fr">Rejoignez Bob aujourd'hui. Votre record personnel est à portée de club.</span>
                 <span class="lang-en">Join Bob today. Your personal best is just a swing away.</span>
             </p>
-            <button class="bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-xl py-5 px-12 rounded-full shadow-[0_0_30px_rgba(163,230,53,0.5)] transition-all transform hover:scale-105">
+            <button onclick="toggleSignupModal()" class="bg-lime-400 hover:bg-lime-300 text-slate-950 font-black text-xl py-5 px-12 rounded-full shadow-[0_0_30px_rgba(163,230,53,0.5)] transition-all transform hover:scale-105">
                 <span class="lang-fr">Télécharger Bob - Essai Gratuit</span>
                 <span class="lang-en">Download Bob - Free Trial</span>
             </button>
@@ -795,11 +1037,29 @@
 
         function toggleLanguage() {
             document.body.classList.toggle('lang-en-active');
-            
-            // Save preference (optional simple logic)
-            const isEn = document.body.classList.contains('lang-en-active');
-            // console.log("Language switched to: " + (isEn ? "EN" : "FR"));
         }
+
+        // Modal Logic
+        function toggleSignupModal() {
+            const modal = document.getElementById('signup-modal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                const modal = document.getElementById('signup-modal');
+                if (!modal.classList.contains('hidden')) {
+                    toggleSignupModal();
+                }
+            }
+        });
     </script>
 </body>
 </html>
